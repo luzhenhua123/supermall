@@ -9,12 +9,12 @@
 
 <script>
 import MainTabBar from "./components/content/mainTabbar/MainTabBar";
-// import  aVue from './components/a'
+
 export default {
   name: 'App',
   components: {       //注册组件
     MainTabBar
-    // aVue:aVue
+
   }
 }
 </script>
