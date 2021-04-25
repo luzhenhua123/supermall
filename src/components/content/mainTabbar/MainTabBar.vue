@@ -20,7 +20,7 @@
     <tab-bar-item path="/profile" >
       <template #item-icon-active><img  src="../../../assets/img/proflie/profile_active.svg" alt=""></template>
       <template #item-icon><img  src="../../../assets/img/proflie/profile.svg" alt=""></template>
-      <template #item-text><div>购物</div></template>
+      <template #item-text><div>个人</div></template>
     </tab-bar-item>
   </tab-bar>
 </template>
