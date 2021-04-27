@@ -42,6 +42,7 @@ export default {
   width: 70px;
   height: 70px;
   margin-bottom: 10px;
+
 }
 a{
   text-decoration: none;

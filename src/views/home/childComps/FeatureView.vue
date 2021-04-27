@@ -15,6 +15,7 @@ name: "FeatureView"
 <style scoped>
 .feature img{
   width: 100%;
+    padding-left: 1px;
 }
 
 </style>
