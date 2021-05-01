@@ -4,8 +4,8 @@
     <home-swiper :banners="banners"/>
     <recommend-view :recommends="recommends"/>
     <feature-view/>
-    <tab-control class="tab-control" :titles="['流行','新款','精选']"/>
-    <goods-list :goods="goods['pop'].list"/>
+    <tab-control class="tab-control" :titles="['流行','新款','精选']" @tabClick="tabClick"/>
+    <goods-list :goods="showGoods"/>
 
 
   </div>
@@ -44,6 +44,7 @@ export default {
         'new': {page: 0, list: []},
         'sell': {page: 0, list: []}
       },
+      currentType:'pop'   //默认展示pop
     }
   },
   created() {
@@ -62,7 +63,27 @@ export default {
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
   },
-  methods: {        //具体逻辑
+  methods: {
+    //事件监听相关方法
+      tabClick(index){
+        // console.log(index);
+        switch (index){
+          case 0:
+            this.currentType = 'pop'
+                break
+          case 1:
+            this.currentType = 'new'
+            break
+          case 2:
+            this.currentType = 'sell'
+            break
+        }
+
+      },
+
+
+    ////////////////////
+    //网络请求相关方法  //具体逻辑
     getHomeMultidata() {
       getHomeMultidata().then(res => {
         // this.result = res;
@@ -77,6 +98,11 @@ export default {
         this.goods[type].list.push(...res.data.list)  //语法糖 获取数组
         this.goods[type].page  += 1
       })
+    }
+  },
+  computed:{
+    showGoods(){
+       return this.goods[this.currentType].list
     }
   }
 }
@@ -100,7 +126,7 @@ export default {
 .tab-control{
   position: sticky;
   top: 44px;
-
+z-index: 9;
   background-color: #ffffff;
 }
 </style>
