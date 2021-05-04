@@ -17,19 +17,19 @@
 export default {
   name: "Swiper",
   props: {
-    interval: {
+    interval: {   //设置间隔3秒滚动一次
       type: Number,
       default: 3000
     },
-    animDuration: {
+    animDuration: {   //设置滚动动画延迟0.3秒 滚动一次
       type: Number,
       default: 300
     },
-    moveRatio: {
+    moveRatio: {    //设置了一个滚动比例，当用户滑到一定程度，自动滚动图片
       type: Number,
       default: 0.25
     },
-    showIndicator: {
+    showIndicator: {    //指示器，默认显示下方红点
       type: Boolean,
       default: true
     }

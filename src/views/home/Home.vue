@@ -1,12 +1,22 @@
 <template>
-  <div id="Home">
-    <nav-bar class="home"><template #center>购物街</template></nav-bar>
-    <home-swiper :banners="banners"/>
-    <recommend-view :recommends="recommends"/>
-    <feature-view/>
-    <tab-control class="tab-control" :titles="['流行','新款','精选']" @tabClick="tabClick"/>
-    <goods-list :goods="showGoods"/>
+  <div id="home">
+    <nav-bar class="home-nav"><template #center>购物街</template></nav-bar>
 
+    <scroll class="content"
+            ref="scroll"
+            :probe-type="3"
+            @scroll="contentScroll"
+            :pull-up-load="true"
+            @pullingUp="loadMore">   <!-- 这里probe-type不加: 则传过去的是字符串而不是number-->
+      <home-swiper :banners="banners"/>
+      <recommend-view :recommends="recommends"/>
+      <feature-view/>
+      <tab-control class="tab-control"
+                   :titles="['流行', '新款', '精选']"
+                   @tabClick="tabClick"/>
+      <goods-list :goods="showGoods"/>
+    </scroll>
+    <back-top @click="backClick" v-show="isShowBackTop"/>
 
   </div>
 </template>
@@ -20,9 +30,11 @@ import FeatureView from "./childComps/FeatureView"; //本周热门
 import TabControl from "../../components/content/tabControl/TabControl";
 import NavBar from "../../components/common/navbar/NavBar";
 import GoodsList from "../../components/content/goods/GoodsList";
-
+import Scroll from "../../components/common/scroll/Scroll";
+import BackTop from "../../components/content/backTop/BackTop"
 
 import {getHomeMultidata,getHomeGoods} from "../../network/Home";
+
 
 export default {
   name: "home",
@@ -32,8 +44,9 @@ export default {
     FeatureView,
     NavBar,
     TabControl,
-    GoodsList
-
+    GoodsList,
+    Scroll,
+    BackTop
   },
   data() {
     return {
@@ -44,9 +57,11 @@ export default {
         'new': {page: 0, list: []},
         'sell': {page: 0, list: []}
       },
-      currentType:'pop'   //默认展示pop
+      currentType:'pop',   //默认展示pop
+      isShowBackTop: false
     }
   },
+
   created() {
     // 1.请求多个数据
     // getHomeMultidata().then(res => {
@@ -78,9 +93,16 @@ export default {
             this.currentType = 'sell'
             break
         }
-
       },
-
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0)
+    },
+    contentScroll(position) {
+      this.isShowBackTop = (-position.y) > 1000
+    },
+    loadMore() {
+      this.getHomeGoods(this.currentType)
+    },
 
     ////////////////////
     //网络请求相关方法  //具体逻辑
@@ -97,6 +119,9 @@ export default {
         // console.log(res);
         this.goods[type].list.push(...res.data.list)  //语法糖 获取数组
         this.goods[type].page  += 1
+
+        this.$refs.scroll.finishPullUp()
+
       })
     }
   },
@@ -109,11 +134,13 @@ export default {
 </script>
 
 <style scoped>
-#Home{
-  padding-top: 44px;
+#home{
+  /*padding-top: 44px;*/
+  height: 100vh;
+  position: relative;
 }
 
-.home{
+.home-nav{
   background-color: var(--color-tint);
   color: #fff;
   position: fixed;
@@ -129,4 +156,19 @@ export default {
 z-index: 9;
   background-color: #ffffff;
 }
+.content {
+  overflow: hidden;
+
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
+}
+
+/*.content {*/
+/*height: calc(100% - 93px);*/
+/*overflow: hidden;*/
+/*margin-top: 44px;*/
+/*}*/
 </style>
