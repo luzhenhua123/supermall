@@ -1,19 +1,24 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav"><template #center>购物街</template></nav-bar>
-
+    <tab-control :titles="['流行', '新款', '精选']"
+                 @tabClick="tabClick"
+                 ref="tabControl1"
+                 class="tab-control" v-show="isTabFixed"/>
     <scroll class="content"
             ref="scroll"
             :probe-type="3"
             @scroll="contentScroll"
             :pull-up-load="true"
             @pullingUp="loadMore">   <!-- 这里probe-type不加: 则传过去的是字符串而不是number-->
-      <home-swiper :banners="banners"/>
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"/>
       <recommend-view :recommends="recommends"/>
       <feature-view/>
       <tab-control class="tab-control"
                    :titles="['流行', '新款', '精选']"
-                   @tabClick="tabClick"/>
+                   @tabClick="tabClick"
+                   ref="tabControl2"
+                    />
       <goods-list :goods="showGoods"/>
     </scroll>
     <back-top @click="backClick" v-show="isShowBackTop"/>
@@ -33,8 +38,8 @@ import GoodsList from "../../components/content/goods/GoodsList";
 import Scroll from "../../components/common/scroll/Scroll";
 import BackTop from "../../components/content/backTop/BackTop"
 
-import {getHomeMultidata,getHomeGoods} from "../../network/Home";
-
+import { getHomeMultidata,getHomeGoods } from "../../network/Home";
+import {debounce} from "../../common/utils";
 
 export default {
   name: "home",
@@ -58,9 +63,18 @@ export default {
         'sell': {page: 0, list: []}
       },
       currentType:'pop',   //默认展示pop
-      isShowBackTop: false
+      isShowBackTop: false,
+      tabOffsetTop: 0,  //监听滚动长度为545,此处为吸顶效果做铺垫
+      isTabFixed: false,
+      saveY: 0
     }
   },
+  computed: {
+    showGoods() {
+      return this.goods[this.currentType].list
+    }
+  },
+
 
   created() {
     // 1.请求多个数据
@@ -78,7 +92,22 @@ export default {
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
   },
+  mounted() {
+
+    //3.监听item中图片加载完成
+  const  refresh = debounce(this.$refs.scroll.refresh,50)
+    this.$bus.on('itemImageLoad',()=>{
+      console.log('---');
+      refresh()
+    })
+  },
   methods: {
+    /**
+     * 事件监听相关方法
+     * **/
+
+
+
     //事件监听相关方法
       tabClick(index){
         // console.log(index);
@@ -98,10 +127,21 @@ export default {
       this.$refs.scroll.scrollTo(0, 0)
     },
     contentScroll(position) {
-      this.isShowBackTop = (-position.y) > 1000
+        //监听下拉
+      // console.log(position);
+      // 1.判断BackTop是否显示
+      this.isShowBackTop = (-position.y) > 1000  //
+      // 2.决定tabControl是否吸顶(position: fixed)
+      this.isTabFixed = (-position.y) > this.tabOffsetTop
+
     },
-    loadMore() {
+    loadMore() {      //加载更多
       this.getHomeGoods(this.currentType)
+    },
+    swiperImageLoad() {
+        //所有的组件都有一个属性$el:用于获取组件中的元素
+      // console.log(this.$refs.tabControl2.$el.offsetTop)
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
     },
 
     ////////////////////
@@ -125,11 +165,7 @@ export default {
       })
     }
   },
-  computed:{
-    showGoods(){
-       return this.goods[this.currentType].list
-    }
-  }
+
 }
 </script>
 
@@ -143,18 +179,23 @@ export default {
 .home-nav{
   background-color: var(--color-tint);
   color: #fff;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 90;
+
+  /*在使用浏览器原生滚动时，为了让导航不跟随一起滚动*/
+  /*position: fixed;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*z-index: 9;*/
   /*z-index 属性指定一个元素的堆叠顺序。 拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面。*/
 }
 .tab-control{
-  position: sticky;
-  top: 44px;
-z-index: 9;
-  background-color: #ffffff;
+  position: relative;
+  z-index: 9;
+background-color: #ffffff;
+  /*position: sticky;  原生实现吸顶效果*/
+  /*  top: 44px;*/
+  /*  z-index: 9;*/
+  /*background-color: #ffffff;*/
 }
 .content {
   overflow: hidden;

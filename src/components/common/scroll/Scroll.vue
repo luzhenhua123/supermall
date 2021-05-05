@@ -35,8 +35,9 @@ export default {
       pullUpLoad: this.pullUpLoad,
       mouseWheel:true,//开启鼠标滚轮
       disableTouch:false, //启用鼠标拖动
-      observeDOM:true
-    })
+      observeDOM:true,
+
+      })
 
     // 2.监听滚动的位置
     this.scroll.on('scroll', (position) => {
@@ -49,13 +50,19 @@ export default {
       this.$emit('pullingUp')
     })
   },
+
   methods: {
     scrollTo(x, y, time=300) {
       this.scroll.scrollTo(x, y, time)
     },
     finishPullUp() {
       this.scroll.finishPullUp()
+    },
+    refresh(){
+      console.log('----')
+      this.scroll && this.scroll.refresh()
     }
+
   }
 }
 </script>
