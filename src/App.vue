@@ -1,6 +1,13 @@
 <template>
-  <div id="nav">
-    <router-view></router-view>
+  <div id="app" class="wrapper">
+<!--    vue3.0 keep-alive方法-->
+    <router-view v-slot="{ Component }">
+      <keep-alive :exclude="['Detail','Profile']">
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
+
+<!--    <router-view></router-view>-->
     <main-tab-bar></main-tab-bar>
 <!--    <a-vue></a-vue>-->
   </div>

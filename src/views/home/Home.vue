@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="home" >
     <nav-bar class="home-nav"><template #center>购物街</template></nav-bar>
     <tab-control :titles="['流行', '新款', '精选']"
                  @tabClick="tabClick"
@@ -74,6 +74,15 @@ export default {
       return this.goods[this.currentType].list
     }
   },
+  // unmounted() {
+  //   console.log('home destroyed');
+  // },
+  // activated(){
+  //   console.log('activated');
+  // },
+  // deactivated() {
+  //   console.log('deactiveated');
+  // },
 
 
   created() {
