@@ -19,7 +19,7 @@
                    @tabClick="tabClick"
                    ref="tabControl2"
                     />
-      <goods-list :goods="showGoods"/>
+      <goods-list :goods="showGoods" />
     </scroll>
     <back-top @click="backClick" v-show="isShowBackTop"/>
 
@@ -107,6 +107,7 @@ export default {
   const  refresh = debounce(this.$refs.scroll.refresh,50)
     this.$bus.on('itemImageLoad',()=>{
       console.log('---');
+
       refresh()
     })
   },

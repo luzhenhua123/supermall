@@ -1,17 +1,14 @@
-module.exports={
+module.exports = {
     configureWebpack:{
         resolve:{
-
             alias:{
-                'assets':'@/assets',        //vue3内部已配置了  'src' = '@' 别名
+                'assets':'@/assets',
                 'common':'@/common',
                 'components':'@/components',
                 'network':'@/network',
-                'views':'@/views',
-
-
-
+                'view':'@/view',
             }
         }
     }
 }
+//vue3内部已配置了  'src' = '@' 别名

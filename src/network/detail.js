@@ -1,13 +1,20 @@
 import {request} from "./request";
 
-export function getDetail(iid) {
+export function getDetail(iid){
     return request({
-        url: '/detail',
-        params: {
+        url:'detail',
+        params:{
             iid
         }
     })
 }
+
+export function getRecommend(){
+    return request({
+        url:'/recommend'
+    })
+}
+
 
 export class Goods {
     constructor(itemInfo, columns, services) {
@@ -43,8 +50,5 @@ export class GoodsParam {
         this.sizes = rule.tables;
     }
 }
-
-
-
 
 

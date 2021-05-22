@@ -8,7 +8,7 @@
       <div class="shop-middle-item shop-middle-left">
         <div class="info-sells">
           <div class="sells-count">
-            {{shop.sells | sellCountFilter}}
+            {{sellCountFilter}}
           </div>
           <div class="sells-text">总销量</div>
         </div>
@@ -39,17 +39,25 @@
 	export default {
 		name: "DetailShopInfo",
     props: {
-		  shop: {
-		    type: Object,
+shop: {
+type: Object,
         default() {
-		      return {}
+return {}
         }
       }
     },
-    filters: {
-      sellCountFilter: function (value) {
-        if (value < 10000) return value;
-        return (value/10000).toFixed(1) + '万'
+    // filters: {     在3.x中，过滤器被删除，不再受支持。相反，我们建议用方法调用或计算属性替换它们。
+    //   sellCountFilter: function (value) {
+    //     if (value < 10000) return value;
+    //     return (value/10000).toFixed(1) + '万'
+    //   }
+    // }
+    computed:{
+      sellCountFilter(){
+        // return   console.log(this.shop.sells)
+        if(this.shop.sells < 10000) return this.shop.sells;
+        return (this.shop.sells/10000).toFixed(1)+"万"
+
       }
     }
 	}

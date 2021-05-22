@@ -1,7 +1,6 @@
 <template>
   <div id="hy-swiper">
-    <div class="swiper" @touchstart="touchStart"
-         @touchmove="touchMove" @touchend="touchEnd" >
+    <div class="swiper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
       <slot></slot>
     </div>
     <slot name="indicator">
@@ -18,19 +17,19 @@
 export default {
   name: "Swiper",
   props: {
-    interval: {   //设置间隔3秒滚动一次
+    interval: {
       type: Number,
       default: 3000
     },
-    animDuration: {   //设置滚动动画延迟0.3秒 滚动一次
+    animDuration: {
       type: Number,
       default: 300
     },
-    moveRatio: {    //设置了一个滚动比例，当用户滑到一定程度，自动滚动图片
+    moveRatio: {
       type: Number,
       default: 0.25
     },
-    showIndicator: {    //指示器，默认显示下方红点
+    showIndicator: {
       type: Boolean,
       default: true
     }
@@ -243,7 +242,4 @@ export default {
 .indi-item.active {
   background-color: rgba(212,62,46,1.0);
 }
-
-
-
 </style>

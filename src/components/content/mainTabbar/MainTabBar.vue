@@ -1,25 +1,25 @@
 <template>
   <tab-bar>
     <tab-bar-item path="/home"  >
-    <template v-slot:item-icon-active><img id="abc"  src="../../../assets/img/home/home_active.svg" alt=""></template>
-    <template #item-icon><img src="../../../assets/img/home/home.svg" alt=""></template>
+    <template v-slot:item-icon-active><img id="abc"  src="../../../assets/img/tabbar/home_active.svg" alt=""></template>
+    <template #item-icon><img src="../../../assets/img/tabbar/home.svg" alt=""></template>
      <template #item-text><div>首页</div></template>
 <!--      <img slot="item-icon" src="./src/assets/img/home/home.svg" alt="">-->
 <!--      <div slot="item-text">首页</div> -->
     </tab-bar-item>
     <tab-bar-item path="/category" >
-      <template #item-icon-active><img  src="../../../assets/img/category/category_active.svg" alt=""></template>
-      <template #item-icon><img  src="../../../assets/img/category/category.svg" alt=""></template>
+      <template #item-icon-active><img  src="../../../assets/img/tabbar/category_active.svg" alt=""></template>
+      <template #item-icon><img  src="../../../assets/img/tabbar/category.svg" alt=""></template>
         <template #item-text><div>分类</div></template>
     </tab-bar-item>
     <tab-bar-item path="/shopcart" >
-      <template #item-icon-active><img  src="../../../assets/img/shopcart/shopcart_active.svg" alt=""></template>
-      <template #item-icon><img  src="../../../assets/img/shopcart/shopcart.svg" alt=""></template>
+      <template #item-icon-active><img  src="../../../assets/img/tabbar/shopcart_active.svg" alt=""></template>
+      <template #item-icon><img  src="../../../assets/img/tabbar/shopcart.svg" alt=""></template>
       <template #item-text><div>购物</div></template>
     </tab-bar-item>
     <tab-bar-item path="/profile" >
-      <template #item-icon-active><img  src="../../../assets/img/proflie/profile_active.svg" alt=""></template>
-      <template #item-icon><img  src="../../../assets/img/proflie/profile.svg" alt=""></template>
+      <template #item-icon-active><img  src="../../../assets/img/tabbar/profile_active.svg" alt=""></template>
+      <template #item-icon><img  src="../../../assets/img/tabbar/profile.svg" alt=""></template>
       <template #item-text><div>个人</div></template>
     </tab-bar-item>
   </tab-bar>
