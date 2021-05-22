@@ -86,6 +86,7 @@ export default {
 
 
   created() {
+
     // 1.请求多个数据
     // getHomeMultidata().then(res => {
     //   // this.result = res;
@@ -95,7 +96,7 @@ export default {
     this.getHomeMultidata()
     // 2.请求商品数据
     // getHomeGoods('pop', 1).then(res => {
-    //   console.log(res);
+    //  console.log(res);
     // })
     this.getHomeGoods('pop')   //调用methods ↓
     this.getHomeGoods('new')

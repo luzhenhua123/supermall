@@ -1,11 +1,11 @@
 <template>
- <div class="goods-item"  @click="itemClick">
-    <img :src="goodsItem.show.img" alt="" @load="imageLoad" >
-  <div class="goods-info">
-  <p>{{goodsItem.title}}</p>
+  <div class="goods-item" @click="itemClick">
+    <img :src="showImage" alt="" @load="imageLoad">
+    <div class="goods-info">
+      <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
       <span class="collect">{{goodsItem.cfav}}</span>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -21,16 +21,33 @@ export default {
     }
   },
   methods:{
-    imageLoad() {
-      this.$bus.emit('itemImageLoad')
+    imageLoad(){
+      this.$bus.$emit('itemImageLoad')
     },
     itemClick() {
-      console.log('点击跳转详情页');
-      this.$router.push('/detail/' + this.goodsItem.iid)    //路由跳转
+      // const iid = this.goodsItem.iid ? this.goodsItem.iid : this.goodsItem.item_id
+      const iid = this.goodsItem.iid ? this.goodsItem.iid : '1m8k4ps'
+      // console.log('iid:', iid)
+      // console.log('this.$router', this.$route.path)
+      if (this.$route.path.indexOf('/detail') !== -1) {
+        this.$router.replace('/detail/' + iid)
+        // console.log('if')
+        this.$router.go(0)
+      } else {
+        this.$router.push('/detail/' + iid)
+        // console.log('else')
+      }
+    }
+  },
+  computed:{
+    showImage() {
+      // if (this.goodsItem.img !== undefined) {
+      //   return this.goodsItem.img
+      // } else {
+        return this.goodsItem.image || this.goodsItem.show.img
+      // }
     }
   }
-
-
 }
 </script>
 
@@ -81,8 +98,5 @@ export default {
   width: 14px;
   height: 14px;
   background: url("../../../assets/img/common/collect.svg") 0 0/14px 14px;
-}
-.goods-item img{
-  height: 100%;
 }
 </style>
