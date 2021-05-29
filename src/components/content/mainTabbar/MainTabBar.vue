@@ -12,7 +12,7 @@
       <template #item-icon><img  src="../../../assets/img/tabbar/category.svg" alt=""></template>
         <template #item-text><div>分类</div></template>
     </tab-bar-item>
-    <tab-bar-item path="/shopcart" >
+    <tab-bar-item path="/Cart" >
       <template #item-icon-active><img  src="../../../assets/img/tabbar/shopcart_active.svg" alt=""></template>
       <template #item-icon><img  src="../../../assets/img/tabbar/shopcart.svg" alt=""></template>
       <template #item-text><div>购物</div></template>

@@ -1,4 +1,4 @@
-<template>
+<template v-if="goods">
 <div class="goods">
   <goods-list-item v-for="item in goods"  :key="item.id" :goods-item=" item"/>
 

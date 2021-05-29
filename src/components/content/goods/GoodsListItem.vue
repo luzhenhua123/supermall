@@ -22,7 +22,7 @@ export default {
   },
   methods:{
     imageLoad(){
-      this.$bus.$emit('itemImageLoad')
+      this.$bus.emit('itemImageLoad')
     },
     itemClick() {
       // const iid = this.goodsItem.iid ? this.goodsItem.iid : this.goodsItem.item_id

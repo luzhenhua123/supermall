@@ -31,7 +31,7 @@
       <div class="a_item">积分商城</div>
       <div class="a_item">会员卡</div>
   <div class="bg_color" style="background:rgba(150,150,150,.08);height: 10px"></div>
-      <div class="a_item"><router-link to="Shopcart" style="text-decoration: none;color: black">我的购物车</router-link></div>
+      <div class="a_item"><router-link to="Cart" style="text-decoration: none;color: black">我的购物车</router-link></div>
       <div class="a_item">下载购物APP</div>
 
 
