@@ -20,7 +20,7 @@ export default {
         // }
         //
 
-        return new Promise((resolve) => {
+        return new Promise((resolve,reject) => {
             //查找之前数组中是否有该商品
             let oldProduct = context.state.cartList.find(function (item){
                 return item.iid === payload.iid

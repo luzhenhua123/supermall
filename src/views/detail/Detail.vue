@@ -5,12 +5,12 @@
             :probe-type="3"
             @scroll="contentScroll"
               style="overflow: hidden">
-      <ul style="width: 100%">
-        <li v-for="item in $store.state.cartList" :key="item.id">
-
-          {{item}}
-        </li>
-      </ul>
+      <div id="mount-point"></div>
+<!--      <ul style="width: 100%">  测试购物车-->
+<!--        <li v-for="item in $store.state.cartList" :key="item.id">-->
+<!--          {{item}}-->
+<!--        </li>-->
+<!--      </ul>-->
       <detail-swiper :top-images="topImages"/>    <!--      属性:topImages 传入值: top-images -->
       <detail-base-info :goods="goods"/>
       <detail-shop-info :shop="shop"/>
@@ -22,6 +22,7 @@
     </scroll>
     <detail-bottom-bar @addCart="addToCart"/>
     <back-top @click="backClick" v-show="isShowBackTop" />
+    <toast :message="message" :show="show"/>
   </div>
 </template>
 
@@ -38,11 +39,14 @@ import BackTop from '../../components/content/backTop/BackTop'
 
 import Scroll from '../../components/common/scroll/Scroll'
 import GoodsList from "../../components/content/goods/GoodsList";
+import Toast from "../../components/common/toast/Toast";
+
 
 
 import {getDetail, Goods, Shop, getRecommend,GoodsParam} from "../../network/detail";
 import {debounce} from "../../common/utils";
 import {backTopMixin} from "../../common/mixin";
+
 
 export default {
   name: "Detail",
@@ -61,8 +65,8 @@ export default {
       themeTopYs:[],
       getThemeTopY:null,
       currentIndex:0,
-      // message:'',
-      // show:false
+      message:'',
+      show:false
 
 
     }
@@ -79,7 +83,7 @@ export default {
     GoodsList,
     DetailBottomBar,
     BackTop,
-    // Toast
+    Toast
 
 
   },
@@ -217,14 +221,16 @@ export default {
       // this.$store.commit('addCart',product)
       //可以使用{mapActions}进行映射,然后使用...mapActions,就可以直接通过this.addCart进行调用
       this.$store.dispatch('addCart',product).then(res => {
-        // this.show = true;
-        // this.message = res
-        // setTimeout(() => {
-        //   this.show = false;
-        //   this.message = ''
-        // },1500)
-        // // console.log(res);
-        this.$toast.show(res,1500)
+        this.show = true;
+        console.log(res)
+        this.message = res
+        setTimeout(() => {
+          this.show = false;
+          this.message = ''
+        },1500)
+        // console.log(res);
+
+        // this.$toast.show(res,1500)
       })
     }
 

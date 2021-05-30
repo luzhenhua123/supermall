@@ -9,6 +9,8 @@ module.exports = {
                 'view':'@/view',
             }
         }
-    }
+    },
+
 }
+
 //vue3内部已配置了  'src' = '@' 别名

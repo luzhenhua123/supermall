@@ -1,7 +1,8 @@
 <!--把toast封装成一个plugin,解决简单组件需多次复用问题-->
 <template>
-  <div class="toast" v-show="isshow">
-    <div>{{message}}</div>
+  <div class="toast" v-show="show">
+    <div >{{message}}</div>
+
   </div>
 </template>
 
@@ -9,33 +10,33 @@
 export default {
   name: "Toast",
   props:{
-    // message:{
-    //   type:String,
-    //   default:''
-    // },
-    // show:{
-    //   type:Boolean,
-    //   default:false
-    // }
-  },
-  data(){
-    return {
-      message:'',
-      isshow:false
+    message:{
+      type:String,
+      default:''
+    },
+    show:{
+      type:Boolean,
+      default:false
     }
   },
-  methods:{
-    show(message,duration){
-      this.message = message
-      this.isshow = true;
-
-
-      setTimeout(() => {
-        this.isshow = false;
-        this.message = ''
-      },duration)
-    }
-  }
+  // data(){
+  //   return {
+  //     message:'',
+  //     isshow:false
+  //   }
+  // },
+  // methods:{
+  //   show(message,duration){
+  //     this.message = message
+  //     this.isshow = true;
+  //
+  //
+  //     setTimeout(() => {
+  //       this.isshow = false;
+  //       this.message = ''
+  //     },duration)
+  //   }
+  // }
 }
 </script>
 

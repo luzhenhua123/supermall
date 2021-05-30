@@ -10,13 +10,15 @@ const Detail = () => import('../views/detail/Detail')
 
 
 const router = createRouter({
+  mode:"hash",
   history: createWebHistory(process.env.BASE_URL),
   routes:[
     {
       path: '/',
       name: 'Home',
       //redirect是重新定向的意思
-      redirect:'/home'
+      redirect:'/home',
+
     },
     {
       path: '/home',

@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
     <!--导航   -->
-    <nav-bar className="nav-bar">
+    <nav-bar class="nav-bar">
       <template v-slot:center>
       <div >购物车({{ cartLength }})</div></template>
     </nav-bar>

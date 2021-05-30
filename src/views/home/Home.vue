@@ -69,24 +69,28 @@ export default {
       saveY: 0
     }
   },
+  activated() {
+    this.$refs.scroll.refresh()
+    this.$refs.scroll.scrollTo(0,this.saveY,0)
+
+  },
+  deactivated() {
+    //1.保存Y值
+    this.saveY = this.$refs.scroll.getScrollY()
+
+    //2.取消全局事件的监听
+    // this.$bus.emit('itemImgLoad',this.itemImgListener)
+  },
+
+
   computed: {
     showGoods() {
       return this.goods[this.currentType].list
     }
   },
-  // unmounted() {
-  //   console.log('home destroyed');
-  // },
-  // activated(){
-  //   console.log('activated');
-  // },
-  // deactivated() {
-  //   console.log('deactiveated');
-  // },
-
 
   created() {
-
+    console.log(123333)
     // 1.请求多个数据
     // getHomeMultidata().then(res => {
     //   // this.result = res;

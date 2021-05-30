@@ -2,7 +2,7 @@
   <div id="app" class="wrapper">
 <!--    vue3.0 keep-alive方法-->
     <router-view v-slot="{ Component }">
-      <keep-alive :exclude="['Detail','Profile']">
+      <keep-alive  >
         <component :is="Component" />
       </keep-alive>
     </router-view>
