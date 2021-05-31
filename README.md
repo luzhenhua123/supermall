@@ -1,4 +1,6 @@
 # supermall
+使用vue3.0进行开发
+
 
 ## Project setup
 ```
