@@ -112,6 +112,11 @@ export default {
   const  refresh = debounce(this.$refs.scroll.refresh,50)
     this.$bus.on('itemImageLoad',()=>{
       console.log('---');
+      var aa=document.getElementById("hy-swiper").getElementsByTagName("a");
+      for(var i=0;i<aa.length;i++){
+        // a[i].setAttribute("hh","dd"+i);
+        aa[i].setAttribute("href","##")
+      }
 
       refresh()
     })
@@ -185,6 +190,7 @@ export default {
 </script>
 
 <style scoped>
+
 #home{
   /*padding-top: 44px;*/
   height: 100vh;

@@ -55,6 +55,7 @@ export default {
     }
   },
   created() {
+
     // 1.请求分类数据
     this._getCategory()
 
@@ -76,6 +77,7 @@ export default {
   },
   methods: {
     _getCategory() {
+
       getCategory().then(res => {
         // 1.获取分类数据
         this.categories = res.data.category.list
@@ -91,8 +93,10 @@ export default {
             }
           }
         }
+
         // 3.请求第一个分类的数据
         this._getSubcategories(0)
+
       })
     },
     _getSubcategories(index) {
@@ -115,6 +119,8 @@ export default {
         this.categoryData[this.currentIndex].categoryDetail[type] = res
         this.categoryData = { ...this.categoryData }
       })
+
+
     },
     /**
      * 事件响应相关的方法
@@ -152,4 +158,5 @@ export default {
   height: 100%;
   flex: 1;
 }
+
 </style>

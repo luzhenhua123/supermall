@@ -1,10 +1,10 @@
 <template>
   <div class="recommend">
     <div v-for="item in recommends" class="recommend-item" :key="item.id">
-      <a :href="item.link">
+
         <img :src="item.image" alt="">
         <div>{{item.title}}</div>
-      </a>
+
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   font-size: 12px;
 
   padding: 10px 0 20px;
-  border-bottom: 10px solid #eee;
+  border-bottom: 3px solid rgba(150,150,150,.1);
 }
 
 .recommend-item {

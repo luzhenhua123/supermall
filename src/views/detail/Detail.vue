@@ -93,10 +93,15 @@ export default {
     this.iid = this.$route.params.iid
 
     //2.根据iid请求详情数据
+    console.log(this.iid)
     getDetail(this.iid).then(res => {
+      console.log(res)
       //1.获取顶部的图片轮播数据
       const data =res.result;
-      this.topImages = data.itemInfo.topImages;
+      this.topImages = data.itemInfo.topImages.map((x)=>{
+        return 'https:' + x
+      });
+
 
       //2.获取商品信息
       this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services);
@@ -233,10 +238,6 @@ export default {
         // this.$toast.show(res,1500)
       })
     }
-
-
-
-
 
   }
 }

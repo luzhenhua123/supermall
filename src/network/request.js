@@ -32,8 +32,7 @@ export function request(config){
     }),err => {
         console.log(err);
     }
-
+    // console.log(config)
     //3.发送真正的网络请求
     return instance(config)
-
 }

@@ -43,7 +43,7 @@
       },
       backClick() {
         // this.$router.back()
-        this.$router.push({ path:'/Home'})
+        this.$router.push({ path:'/home'})
       }
     }
   }
